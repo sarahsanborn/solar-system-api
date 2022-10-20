@@ -4,22 +4,28 @@ Talk through each section with your partner. Add notes on what you discussed and
 
 ## Accessibility Needs
 *What does each team member need access to in order to succeed and show up the best they can?*
+Being open to asking questions to instructors and TAs when needed. Search online when we encounter difficulties. Help each other always. Work on the project together, not separately. 
 
 ## Collaboration vs. individual work expectations
 *Clarify your collaboration expectations- does your group want to write code together all of the time? Or divide work to do independently, then come together to share accomplishments? What tools and technologies can help your collaboration?*
+Work together in class rather than independently.
 
 ## Learning Style
 *How does each team member learn best in project settings?*
+Use psuedocode for more complicated code to help make our thinking clear and knowledgable. Look at the general approach to a problem and why each step is needed, rather than just going through the motions. 
 
 ## Preferred Feedback Style
 *How does each team member best receive feedback?*
+Be direct and explain needs. Speak to each other when we have needs. 
 
 ## One Team Communication Skill to Improve
 *What is a teamwork-related skill you want to work on?*
+Wanjun: Be sincere with each other
+Sarah: Communicate my needs 
 
 ## Optional: Other agreements
 *Other co-working agreements that were not captured in the above sections.*
 
 ## Signatures
-______________ _______________
-Date: _________
+_Sarah Sanborn_____________ ____Wanjun Lan___________
+Date: __10/20/22_______

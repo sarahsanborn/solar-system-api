@@ -26,9 +26,25 @@ planet_bp = Blueprint("planets", __name__, url_prefix="/planets")
 
 @planet_bp.route("", methods=["GET"])
 def get_all_planets():
-    all_planets = Planet.query.all()
-    result = [item.to_dict() for item in all_planets]
+    name_query_value = request.args.get("name")
+    if name_query_value is not None:
+        planets = Planet.query.filter_by(name=name_query_value)
+    else:
+        planets = Planet.query.all()
+
+    result = [item.to_dict() for item in planets]
     return jsonify(result), 200
+
+# def validate_query(attr):
+#     planet_value = request.args.get(attr)
+#     all_planets = Planet.query.all()
+#     for planet in all_planets:
+#         if not planet:
+#             return abort(make_response({"msg": f"Could not find planet with attribute {attr}"}))
+#         else:
+#             return planet_value
+
+
 
 
 @planet_bp.route("/<planet_id>", methods=["GET"])

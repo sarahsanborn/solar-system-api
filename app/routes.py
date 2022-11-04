@@ -3,24 +3,6 @@ from app.models.planet import Planet
 from flask import Blueprint, jsonify, abort, make_response,request
 
 
-# class Planet():
-#     def __init__(self, id, name, description):
-#         self.id = id
-#         self.name = name
-#         self.description = description
-
-
-# planet_items = [
-#     Planet(1, "Mercury", "the smallest planet"),
-#     Planet(2, "Venus", "the hottest planet"),
-#     Planet(3, "Earth", "the best planet"),
-#     Planet(4, "Mars", "the red planet"),
-#     Planet(5, "Jupiter", "the biggest planet"),
-#     Planet(6, "Saturn", "the most rings planet"),
-#     Planet(7, "Uranus", "named after the Greek god of the sky"),
-#     Planet(8, "Neptune", "the last planet")
-# ]
-
 planet_bp = Blueprint("planets", __name__, url_prefix="/planets")
 
 
@@ -45,8 +27,6 @@ def get_all_planets():
 #             return planet_value
 
 
-
-
 @planet_bp.route("/<planet_id>", methods=["GET"])
 def get_one_planet(planet_id):
     planet = get_planet_from_id(planet_id)
@@ -57,9 +37,7 @@ def get_one_planet(planet_id):
 @planet_bp.route("", methods=["POST"])
 def create_new_planet():
     request_body = request.get_json()
-    new_planet = Planet(name=request_body["name"],
-                    solid=request_body["solid"],
-                    description=request_body["description"])
+    new_planet = Planet.from_dict(request_body)
 
     db.session.add(new_planet)
     db.session.commit()

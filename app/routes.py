@@ -21,15 +21,17 @@ def get_all_planets():
 #     planet_value = request.args.get(attr)
 #     all_planets = Planet.query.all()
 #     for planet in all_planets:
+#         if planet_value in planet.values():
+
 #         if not planet:
-#             return abort(make_response({"msg": f"Could not find planet with attribute {attr}"}))
+#             return abort(make_response({"msg": f"Could not find planet with attribute {attr}"}, 404))
 #         else:
 #             return planet_value
 
 
 @planet_bp.route("/<planet_id>", methods=["GET"])
 def get_one_planet(planet_id):
-    planet = get_planet_from_id(planet_id)
+    planet = get_class_object_from_id(Planet, planet_id)
 
     return jsonify(planet.to_dict())
 
@@ -42,12 +44,12 @@ def create_new_planet():
     db.session.add(new_planet)
     db.session.commit()
 
-    return make_response(f"Planet {new_planet.name} successfully created", 201)
+    return make_response(f"Planet {new_planet.name} with id {new_planet.id} successfully created", 201)
 
 
 @planet_bp.route("/<planet_id>", methods=["DELETE"])
 def delete_one_planet(planet_id):
-    planet_to_delete = get_planet_from_id(planet_id)
+    planet_to_delete = get_class_object_from_id(Planet, planet_id)
 
     db.session.delete(planet_to_delete)
     db.session.commit()
@@ -57,7 +59,7 @@ def delete_one_planet(planet_id):
 
 @planet_bp.route("/<planet_id>", methods=["PUT"])
 def update_one_planet(planet_id):
-    planet_to_update = get_planet_from_id(planet_id)
+    planet_to_update = get_class_object_from_id(Planet, planet_id)
 
     request_body = request.get_json()
 
@@ -73,15 +75,15 @@ def update_one_planet(planet_id):
     return jsonify({"message": f"Successfully updated planet {planet_id}"}), 200
 
 
-def get_planet_from_id(planet_id):
+def get_class_object_from_id(cls, model_id):
     try:
-        planet_id = int(planet_id)
+        model_id = int(model_id)
     except ValueError:
-        return abort(make_response({"message": f"Invalid data type: {planet_id}"}, 400))
+        return abort(make_response({"message": f"Invalid data type {cls.__name__} with id: {model_id}"}, 400))
     
-    chosen_planet = Planet.query.get(planet_id)
+    chosen_object = cls.query.get(model_id)
 
-    if not chosen_planet:
-        return abort(make_response({"message": f"Could not find planet with id {planet_id}"}, 404))
+    if not chosen_object:
+        return abort(make_response({"message": f"Could not find {cls.__name__} with id {model_id}"}, 404))
     
-    return chosen_planet
+    return chosen_object
